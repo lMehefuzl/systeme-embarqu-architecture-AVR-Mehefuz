@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composants d'un Microcontrôleur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #f1f8ff;
+        }
+        .component {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Composants d'un Microcontrôleur et leurs Rôles</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>COMPOSANT</th>
+                <th>RÔLE PRINCIPAL</th>
+                <th>RÔLES SPÉCIFIQUES</th>
+                <th>EXEMPLE PRATIQUE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="component">Flash Program Memory</td>
+                <td>Stocker le programme exécutable</td>
+                <td>
+                    <ul>
+                        <li>Contient le code machine</li>
+                        <li>Stocke les constantes</li>
+                        <li>Garde les adresses des fonctions</li>
+                        <li>Contient le bootloader</li>
+                    </ul>
+                </td>
+                <td>void setup() { pinMode(13,OUTPUT); }</td>
+            </tr>
+            <tr>
+                <td class="component">Program Counter</td>
+                <td>Pointer vers la prochaine instruction</td>
+                <td>
+                    <ul>
+                        <li>Suivre l'exécution</li>
+                        <li>Gérer les sauts</li>
+                        <li>Séquencement du programme</li>
+                    </ul>
+                </td>
+                <td>PC → adresse 0x100 (prochaine instruction)</td>
+            </tr>
+            <tr>
+                <td class="component">Instruction Register</td>
+                <td>Stocker l'instruction en cours</td>
+                <td>
+                    <ul>
+                        <li>Garder l'instruction courante</li>
+                        <li>Fournir au décodeur</li>
+                    </ul>
+                </td>
+                <td>IR ← "ADD R1,R2" (instruction binaire)</td>
+            </tr>
+            <tr>
+                <td class="component">Instruction Decoder</td>
+                <td>Traduire les instructions</td>
+                <td>
+                    <ul>
+                        <li>Décoder le code binaire</li>
+                        <li>Activer les bonnes lignes de contrôle</li>
+                    </ul>
+                </td>
+                <td>"1110 1101" → activation addition ALU</td>
+            </tr>
+            <tr>
+                <td class="component">Control Lines</td>
+                <td>Contrôler les composants</td>
+                <td>
+                    <ul>
+                        <li>Activer/désactiver les unités</li>
+                        <li>Synchroniser les opérations</li>
+                    </ul>
+                </td>
+                <td>"Active ALU, active registre R1"</td>
+            </tr>
+            <tr>
+                <td class="component">32x8 General Purpose Registers</td>
+                <td>Calculs immédiats</td>
+                <td>
+                    <ul>
+                        <li>Stockage temporaire ultra-rapide</li>
+                        <li>Opérations arithmétiques</li>
+                        <li>Adressage indirect</li>
+                    </ul>
+                </td>
+                <td>R1 = R2 + R3 (1 cycle)</td>
+            </tr>
+            <tr>
+                <td class="component">ALU</td>
+                <td>Effectuer les calculs</td>
+                <td>
+                    <ul>
+                        <li>Opérations arithmétiques</li>
+                        <li>Opérations logiques</li>
+                        <li>Comparaisons</li>
+                    </ul>
+                </td>
+                <td>5 + 3 = 8 (calcul effectif)</td>
+            </tr>
+            <tr>
+                <td class="component">Status and Control</td>
+                <td>Surveiller l'état du CPU</td>
+                <td>
+                    <ul>
+                        <li>Drapeaux de résultat</li>
+                        <li>Contrôle des interruptions</li>
+                        <li>État du processeur</li>
+                    </ul>
+                </td>
+                <td>Z=1 (résultat zero), C=0 (pas de retenue)</td>
+            </tr>
+            <tr>
+                <td class="component">Data SRAM</td>
+                <td>Stocker les données variables</td>
+                <td>
+                    <ul>
+                        <li>Variables du programme</li>
+                        <li>Pile d'exécution</li>
+                        <li>Données temporaires</li>
+                    </ul>
+                </td>
+                <td>int compteur = 0; (en SRAM)</td>
+            </tr>
+            <tr>
+                <td class="component">EEPROM</td>
+                <td>Stockage persistant données</td>
+                <td>
+                    <ul>
+                        <li>Sauvegarde de paramètres</li>
+                        <li>Données de configuration</li>
+                        <li>Historique utilisateur</li>
+                    </ul>
+                </td>
+                <td>EEPROM.write(0, valeur);</td>
+            </tr>
+            <tr>
+                <td class="component">I/O Lines</td>
+                <td>Communication externe</td>
+                <td>
+                    <ul>
+                        <li>Entrées numériques/analogiques</li>
+                        <li>Sorties PWM</li>
+                        <li>Communication</li>
+                    </ul>
+                </td>
+                <td>digitalRead(A0), analogWrite(3, 128)</td>
+            </tr>
+            <tr>
+                <td class="component">Interrupt Unit</td>
+                <td>Gérer les interruptions</td>
+                <td>
+                    <ul>
+                        <li>Priorité des interruptions</li>
+                        <li>Vecteurs d'interruption</li>
+                        <li>Gestion des urgences</li>
+                    </ul>
+                </td>
+                <td>attachInterrupt(digitalPinToInterrupt(2), ISR, CHANGE);</td>
+            </tr>
+            <tr>
+                <td class="component">SPI Unit</td>
+                <td>Communication série haute vitesse</td>
+                <td>
+                    <ul>
+                        <li>Communication avec périphériques</li>
+                        <li>Transfert de données rapide</li>
+                        <li>Protocole maître/esclave</li>
+                    </ul>
+                </td>
+                <td>SPI.transfer(0x55);</td>
+            </tr>
+            <tr>
+                <td class="component">Watchdog Timer</td>
+                <td>Surveillance du système</td>
+                <td>
+                    <ul>
+                        <li>Détection de plantage</li>
+                        <li>Reset automatique</li>
+                        <li>Sécurité système</li>
+                    </ul>
+                </td>
+                <td>wdt_reset(); (reset du watchdog)</td>
+            </tr>
+            <tr>
+                <td class="component">Analog Comparator</td>
+                <td>Comparaison de tensions</td>
+                <td>
+                    <ul>
+                        <li>Comparaison analogique</li>
+                        <li>Détection de seuil</li>
+                        <li>Conversion A/N rapide</li>
+                    </ul>
+                </td>
+                <td>Comparaison tension A0 > A1</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
